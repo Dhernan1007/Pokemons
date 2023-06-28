@@ -1,43 +1,71 @@
 const { Pokemon, Type } = require('../../db');
 
-module.exports = async (name, image, height, weight, hp, attack, defense, speed, type) => {
+// Función para crear un nuevo Pokémon en la base de datos
+module.exports = async (name, image, height, weight, hp, attack, defense, speed, types) => {
+   try {
+      // Crear el Pokémon en la base de datos
+      const pokemon = await Pokemon.create({
+         name,
+         image,
+         hp,
+         attack,
+         defense,
+         speed,
+         height,
+         weight,
+      });
 
-   // Crear un nuevo Pokémon en la base de datos
-   const pokemon = await Pokemon.create({
-      name,
-      image,
-      hp,
-      attack,
-      defense,
-      speed,
-      height,
-      weight,
-   });
+      if (types && types.length > 0) {
+         // Buscar los tipos especificados en la base de datos
+         const pokeTypes = await findTypesByName(types);
 
-   // Buscar el tipo especificado en la base de datos
-   const pokeType = await Type.findAll({
-      where: {
-         name: type
+         // Asociar los tipos al Pokémon creado en la base de datos
+         await pokemon.addTypes(pokeTypes);
       }
-   });
 
-   // Asociar el tipo al Pokémon creado en la base de datos
-   await pokemon.addType(pokeType);
+      // Buscar el Pokémon recién creado con sus tipos asociados
+      const searchPoke = await findPokemonWithTypes(pokemon.id);
 
-   // Buscar el Pokémon recién creado con su tipo asociado
-   const searchPoke = await Pokemon.findOne({
-      where: {
-         id: pokemon.id
-      },
-      include: [{
-         model: Type,
-         attributes: ['name'],
-         through: {
-            attributes: []
+      // Devolver el Pokémon con sus tipos correspondientes
+      return searchPoke;
+   } catch (error) {
+      console.error('Error al crear el Pokémon:', error);
+      throw error;
+   }
+};
+
+// Función para buscar tipos por sus nombres en la base de datos
+const findTypesByName = async (typeNames) => {
+   try {
+      const types = await Type.findAll({
+         where: {
+            name: typeNames
          }
-      }]
-   });
+      });
+      return types;
+   } catch (error) {
+      console.error('Error al buscar los tipos:', error);
+      throw error;
+   }
+};
 
-   // Devolver el Pokémon con su tipo correspondiente
-   return searchPoke;
-}
+// Función para buscar un Pokémon con sus tipos asociados en la base de datos
+const findPokemonWithTypes = async (pokemonId) => {
+   try {
+      const searchPoke = await Pokemon.findOne({
+         where: {
+            id: pokemonId
+         },
+         include: [{
+            model: Type,
+            attributes: ['name'],
+            through: {
+               attributes: []
+            }
+         }]
+      });
+      return searchPoke;
+   } catch (error) {
+      throw error;
+   }
+};
