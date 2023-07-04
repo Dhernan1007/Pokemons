@@ -1,3 +1,5 @@
+const { BOOLEAN } = require("sequelize")
+
 module.exports = (pokemonDB) => {
     return {
         id: pokemonDB.id,
@@ -9,6 +11,7 @@ module.exports = (pokemonDB) => {
         speed: pokemonDB.speed,
         height: pokemonDB.height,
         weight: pokemonDB.weight,
-        type: pokemonDB.types.map(type => type.name)
+        type: pokemonDB.types.map(type => type.name),
+        createdInDb: true
     }
 }

@@ -1,0 +1,33 @@
+.searchbar {
+    display: flex;
+    align-items: center;
+  }
+  
+  .searchbar input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    margin-right: 10px;
+  }
+  
+  .searchbarbutton {
+    padding: 5px 20px 5px 20px;
+    background-color: #4cd925;
+    color: white;
+    margin: auto;
+    border: none;
+    height: 50%;
+    width: 50%;
+    border-radius: 5px;
+    align-self: center; /* Agrega esta línea para alinear verticalmente el botón */
+    cursor: pointer;
+    justify-content: center;
+    
+  }
+  
+  .searchbarbutton:hover {
+    background-color: #555;
+    border: solid 1px white;
+    font-weight: bold;
+  }

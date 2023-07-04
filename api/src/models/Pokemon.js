@@ -84,6 +84,17 @@ module.exports = (sequelize) => {
         max: 999
       }
     },
+    /*flag*/ 
+    createdInDb: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
+      set(value) {
+        // Convierte el valor en un booleano
+        const boolValue = !!value;
+        this.setDataValue('createdInDb', boolValue);
+      }
+    }
   },{
     timestamps: false, freezeTableName: true,
   });

@@ -1,4 +1,6 @@
 module.exports = (pokemon) => {
+
+
   return {
     id: pokemon.data.id,
     name: pokemon.data.name.charAt(0).toUpperCase() + pokemon.data.name.slice(1),
@@ -10,7 +12,7 @@ module.exports = (pokemon) => {
     defense: pokemon.data.stats[2].base_stat,
     speed: pokemon.data.stats[5].base_stat,
     // type: pokemon.types.type.name, 
-    type: (pokemon.data.types.map(elements =>elements.type.name.charAt(0).toUpperCase() + elements.type.name.slice(1))).join(' / '),
+    type: pokemon.data.types.map(elements =>elements.type.name),
     // type: pokemon.types.map(elements => elements = { type: elements.type.name }),
   }
 
