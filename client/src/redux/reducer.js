@@ -1,9 +1,12 @@
-import { GET_ALL_POKEMON, GET_TYPE_POKEMON, GET_NAME_POKEMON, FILTER_BY_STATUS} from "./action-types"
+import { GET_ALL_POKEMON, GET_TYPE_POKEMON, GET_NAME_POKEMON, 
+    FILTER_BY_TYPE, FILTER_CREATED, ORDER_BY_NAME, 
+    ORDER_BY_ATTACK, POST_POKEMON,  DETAIL_POKEMON} from "./action-types"
 
 const initialState ={
     allPoke: [],
     allType: [],
-    allPokemon: []
+    allPokemon: [],
+    detailPokemon:[]
 }
 
 const reducer = (state = initialState, {type, payload})=>{
@@ -24,14 +27,98 @@ const reducer = (state = initialState, {type, payload})=>{
                 ...state,
                 allType: payload
             }
-        case FILTER_BY_STATUS:
+        case FILTER_BY_TYPE:
             const allPokemons = state.allPokemon
-            const statusFiltered = payload === 'all' ? allPokemons : allPokemons?.filter(elem =>elem.type === payload)
+            const statusFiltered = payload === 'all' ? state.allPoke : allPokemons.filter(elem => elem.type.includes(payload))
             return{
                 ...state,
                 allPoke: statusFiltered,
-                
             }
+        case FILTER_CREATED:
+            const createAllPokemons = state.allPokemon
+            //const num = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
+            //const num = /^[1-9]\d*$/
+            const createdFilter = payload === "dataBase" ? createAllPokemons.filter(e =>e.createdInDb) : createAllPokemons.filter(e => !e.createdInDb)
+            return{
+                ...state,
+                allPoke: payload === "all" ? state.allPokemon : createdFilter
+            }
+            case ORDER_BY_NAME:
+            let sortedArr = payload === 'asc' ? state.allPoke.sort(function(a,b){
+                if(a.name > b.name){
+                    return 1
+                }
+                if (b.name > a.name) {
+                    return -1
+                }
+                return 0;
+            }) :
+            state.allPoke.sort(function(a,b){
+                if(a.name > b.name){
+                    return -1
+                }
+                if (b.name > a.name) {
+                    return 1
+                }
+            })
+                return{
+                    ...state,
+                    allPoke: sortedArr
+                }
+
+            case ORDER_BY_ATTACK:
+                let sortedAttack = payload === 'asc' ? state.allPoke.sort(function(a,b){
+                    if(a.attack > b.attack){
+                        return 1
+                    }
+                    if (b.attack > a.attack) {
+                        return -1
+                    }
+                    return 0;
+                }) :
+                state.allPoke.sort(function(a,b){
+                    if(a.attack > b.attack){
+                        return -1
+                    }
+                    if (b.attack > a.attack) {
+                        return 1
+                    }
+                })
+            return{
+                ...state,
+                allPoke: sortedAttack
+            }
+                    case POST_POKEMON:
+                        return {
+                            ...state,
+                        }
+                    case DETAIL_POKEMON:
+                     return{
+                        ...state,
+                        detailPokemon: payload
+                     }
+            /*  case ORDER_BY_TYPE:
+                let sortedType = payload === 'asc' ? state.allPoke.sort(function(a,b){
+                    if(a.attack > b.attack){
+                        return -1
+                    }
+                    if (b.attack > a.attack) {
+                        return 1
+                    }
+                    return 0;
+                }) :
+                state.allPoke.sort(function(a,b){
+                    if(a.attack > b.attack){
+                        return 1
+                    }
+                    if (b.attack > a.attack) {
+                        return -1
+                    }
+                })
+            return{
+                ...state,
+                allPoke: sortedAttack
+            } */
 
         default: return{
             ...state
@@ -40,4 +127,3 @@ const reducer = (state = initialState, {type, payload})=>{
 }
 
 export default reducer;
-

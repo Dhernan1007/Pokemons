@@ -1,9 +1,8 @@
-
 import React, { useEffect, useState } from 'react'
 import Card from '../../components/card/Card'
 import { useDispatch, useSelector } from 'react-redux'
-import { filterByStatus, getAllpokemon, getTypePokemon} from '../../redux/actions'
-// import { Link } from 'react-router-dom/cjs/react-router-dom.min'
+import { filterByTypes, filterCreatedPoke, getAllpokemon, getTypePokemon, orderByName, orderByAttack} from '../../redux/actions'
+import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 import SearchBar from '../../components/searchBar/SearchBar'
 import Paginate from '../../components/paginate/Paginate'
 // import { getTypePokemon } from '../../redux/actions'
@@ -27,7 +26,7 @@ export default function Home(props) {
     setCurrentPage(pageNumber)
   }
 //fin de paginado
-
+const [order, setOrder] = useState('') /* --> estado local vacío que me permite ordenar asc y desc */
   // ciclo que maneja todos los pokemon
   useEffect(() => {
     dispatch(getAllpokemon())
@@ -52,45 +51,75 @@ export default function Home(props) {
 
   //filtro de los tipos
   function handlerFilterStatus(event) {
-    dispatch(filterByStatus(event.target.value))
+    event.preventDefault();
+    dispatch(filterByTypes(event.target.value))
   }
 
+  //Filtrado por creado
+
+function handleFilterCreated(e){
+  dispatch(filterCreatedPoke(e.target.value)) /* --> lo que viene del select que es el payload  */
+}
+
+// ordenamiento descendente y ascendente
+function handleSortName(e){
+  e.preventDefault();
+  dispatch(orderByName(e.target.value))
+  setCurrentPage(1);
+  setOrder(`Ordenado ${e.target.value}`) /* --> visita el estado local y se renderiza */
+}
+
+// ordenamiento por ataque
+function handleSortAttack(e){
+  e.preventDefault();
+  dispatch(orderByAttack(e.target.value))
+  setCurrentPage(1);
+  setOrder(`Ordenado ${e.target.value}`) /* --> visita el estado local y se renderiza */
+}
 
   return (
     <div>
 
       <SearchBar />
 
-      {/* <Link to='/create' style={{ textDecoration: "none" }}>Create Pokemon</Link> */}
+      <button><Link to='/create' style={{ textDecoration: "none" }}>Create Pokemon</Link></button>
       <button onClick={(event) => { handlerClick(event) }}>Reload Pokemon</button>{/* volver a cargar todos los pokemon */}
 
 
-      {/* paginado */}
+      {/* paginate */}
       <div>
         <Paginate
+          currentPage={currentPage}
           pokemonPerPage={pokemonPerPage}
           allPokemons={allPokemons.length}
           paginate={paginate}
         />
       </div>
 
-      <select className='order'>
+      {/* name */}
+      <select className='order'onChange={(e) => handleSortName(e)}>
+      <option >Select Order Alphabetical</option>
         <option value='asc'>Ascendent</option>
         <option value='desc'>Descendent</option>
       </select>
 
+      {/* attack */}
+      <select className='attack'onChange={(e) => handleSortAttack(e)}>
+        <option >Select attack Order</option>
+        <option value='asc'>Ascendent attack</option>
+        <option value='desc'>Descendent attack</option>
+      </select>
+
       <div>
 
-        <select className='types' onChange={(event) => handlerFilterStatus(event)} defaultValue='all'>
-          <option value='all' disabled>Select By Types</option>
-          {allType.length > 0 &&
-            allType.map((pok) => (
-              <option key={pok.id} value={pok.name}>
-                {pok.name}
-              </option>
-            ))}
-        </select>
-
+      <select className="types" onChange={handlerFilterStatus} defaultValue="default">
+  <option value="default" disabled>Select By Types</option>
+  {allType?.map((pok) => (
+    <option key={pok.id} value={pok.name}>
+      {pok.name.charAt(0).toUpperCase() + pok.name.slice(1)}
+    </option>
+  ))}
+</select>
         {/*
         
         como no se debe hacer
@@ -120,7 +149,8 @@ Estos cambios se realizaron para corregir posibles errores y asegurar un funcion
 
       </div>
 
-      <select>
+      <select onChange={(e)=>handleFilterCreated(e)}>
+      <option>Select Pokemon</option>
         <option value='all'>All Pokemon</option>
         <option value='api'>Pokemon Api</option>
         <option value='dataBase'>created Pokemon</option>

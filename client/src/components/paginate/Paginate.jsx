@@ -1,25 +1,29 @@
 import React from 'react';
 import styles from './paginate.module.css'; // Importar el módulo de estilos
 
-export default function Paginate({ pokemonPerPage, allPokemons, paginate, activePage }) {
+export default function Paginate({ pokemonPerPage, allPokemons, paginate, activePage, currentPage }) {
   const pageNumbers = [];
+  const totalPage = Math.ceil(allPokemons / pokemonPerPage)
 
-  for (let i = 0; i < Math.ceil(allPokemons / pokemonPerPage); i++) {
+  for (let i = 0; i < totalPage; i++) {
     pageNumbers.push(i + 1);
   }
 
   return (
     <nav>
-      <ul className={styles.paginate}> {/* Utilizar la clase CSS desde el módulo */}
+      <div className={styles.paginate}> {/* Utilizar la clase CSS desde el módulo */}
+      <button onClick={()=>{currentPage > 1 && paginate(currentPage - 1)}}>Prev</button> {/*cuando esta en la primer pag no retrocede mas */}
         {pageNumbers &&
           pageNumbers.map((number) => (
             <div className={styles.number} key={number}>
+            
               <p onClick={() => paginate(number)} className={number === activePage ? styles.active : ''}>
                 {number}
               </p>
             </div>
           ))}
-      </ul>
+          <button onClick={()=>{currentPage < totalPage && paginate(currentPage + 1)}}>Next</button> 
+      </div>
     </nav>
   );
 }

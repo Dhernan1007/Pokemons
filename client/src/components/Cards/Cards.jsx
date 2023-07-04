@@ -5,6 +5,7 @@ import Card from '../card/Card'
 export default function Cards(props){ 
     const pokemons = useSelector(state => state.allPoke)
     // console.log(pokemons);
+   
     return <div>
 {
         pokemons.map((pokemon)=>{
@@ -26,3 +27,4 @@ export default function Cards(props){
     })}
 </div>
 }
+

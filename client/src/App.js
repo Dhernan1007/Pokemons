@@ -1,6 +1,6 @@
 import './App.css';
 import {Route, useLocation} from 'react-router-dom'
-import {Detail, Form, Home, Landing} from './views'
+import {Detail, Home, Form, Landing} from './views'
 import NavBar from './components/NavBar/NavBar';
 // import { useEffect } from 'react';
 // import {getAllpokemon } from './redux/actions';
@@ -20,7 +20,7 @@ function App() {
      {location.pathname !== '/' && <NavBar/>} 
         <Route exact path ='/' component={Landing}/>
         <Route path ='/home' component={Home}/>
-        <Route path ='/detail/:idPokemon' component={Detail}/>
+        <Route path ='/detail/:id' component={Detail}/>
         <Route path ='/create' component={Form}/>
 
     </div>
