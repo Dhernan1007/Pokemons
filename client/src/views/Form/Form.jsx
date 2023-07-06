@@ -11,11 +11,11 @@ import style from './Form.module.css'
 function validate(input) {
   const errors = {};
 
-  if (!input.name) {
-    errors.name = 'El nombre no puede estar vacío';
-  }
+  // if (!input.name) {
+  //   errors.name = console.warn('El nombre no puede estar vacío');
+  // }
   if (input.name.trim().length === 0) {
-    errors.name = 'Este campo no debe estar lleno solo de espacios';
+    errors.name = alert('Te has olvidado de ingresar tu nombre');
   }
 
   if (input.name.length < 3 || input.name.length > 12) {
@@ -106,9 +106,10 @@ const Form = () => {
   };
 
   return (
+    <div className={style.formBack}>
     <div className={style.searchInput}>
       <Link to="/home" style={{ textDecoration: "none" }}>
-        <button>Back</button>
+        <button>To Home</button>
       </Link>
       <h1>Crear un nuevo Pokémon</h1>
       <form onSubmit={handleSubmit}>
@@ -119,6 +120,7 @@ const Form = () => {
             value={input.name}
             placeholder="Nombre"
             onChange={handleInputChange}
+            autocomplete="off"
             required
           />
           {errors.name && <p>{errors.name}</p>}
@@ -130,6 +132,7 @@ const Form = () => {
             value={input.hp}
             placeholder="HP"
             onChange={handleInputChange}
+            autocomplete="off"
             required
           />
           {errors.hp && <p>{errors.hp}</p>}
@@ -141,6 +144,7 @@ const Form = () => {
             value={input.attack}
             placeholder="Ataque"
             onChange={handleInputChange}
+            autocomplete="off"
             required
           />
           {errors.attack && <p>{errors.attack}</p>}
@@ -152,6 +156,7 @@ const Form = () => {
             value={input.defense}
             placeholder="Defensa"
             onChange={handleInputChange}
+            autocomplete="off"
             required
           />
           {errors.defense && <p>{errors.defense}</p>}
@@ -163,6 +168,7 @@ const Form = () => {
             value={input.speed}
             placeholder="Velocidad"
             onChange={handleInputChange}
+            autocomplete="off"
             required
           />
           {errors.speed && <p>{errors.speed}</p>}
@@ -174,6 +180,7 @@ const Form = () => {
             value={input.height}
             placeholder="Altura"
             onChange={handleInputChange}
+            autocomplete="off"
             required
           />
           {errors.height && <p>{errors.height}</p>}
@@ -185,6 +192,7 @@ const Form = () => {
             value={input.weight}
             placeholder="Peso"
             onChange={handleInputChange}
+            autocomplete="off"
             required
           />
           {errors.weight && <p>{errors.weight}</p>}
@@ -194,6 +202,7 @@ const Form = () => {
             className="types"
             value={input.type}
             onChange={handleInputChange}
+            autocomplete="off"
             name="type"
             required
           >
@@ -212,6 +221,7 @@ const Form = () => {
       {/* <img src={img1} alt="img" width="200px" height="auto" />
       <img src={img2} alt="img" width="200px" height="auto" />
       <img src={img3} alt="img" width="200px" height="auto" /> */}
+    </div>
     </div>
   );
 };

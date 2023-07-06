@@ -12,9 +12,9 @@ export default function NavBar() {
       </NavLink>
       </header>
     <div className ={style.navbuttons}>
-    <NavLink to = "/about" className = {style.navbarlink}>
+    {/* <NavLink to = "/about" className = {style.navbarlink}>
       About
-      </NavLink>
+      </NavLink> */}
       
     </div>
     </nav>

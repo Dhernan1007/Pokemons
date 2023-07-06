@@ -54,12 +54,14 @@ export default function Home(props) {
   function handlerFilterStatus(event) {
     event.preventDefault();
     dispatch(filterByTypes(event.target.value))
+    setCurrentPage(1)
   }
 
   //Filtrado por creado
 
   function handleFilterCreated(e) {
     dispatch(filterCreatedPoke(e.target.value)) /* --> lo que viene del select que es el payload  */
+    setCurrentPage(1)
   }
 
   // ordenamiento descendente y ascendente
@@ -79,8 +81,7 @@ export default function Home(props) {
   }
 
   return (
-    <div>
-
+    <div className={style.containerHome}>
 
       <div className={style.allOrder}>
         {/* name */}
@@ -128,6 +129,15 @@ export default function Home(props) {
   <div className={style.buttonR}>
     <button><Link to='/create' style={{ textDecoration: "none" }}>Create Pokemon</Link></button>
     <button onClick={handlerClick}>Reload Pokemon</button>
+  </div>
+
+  <div>
+    <Paginate
+      currentPage={currentPage}
+      pokemonPerPage={pokemonPerPage}
+      allPokemons={allPokemons.length}
+      paginate={paginate}
+    />
   </div>
 
   <div className={style.cardTas}>

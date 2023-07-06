@@ -1,20 +1,25 @@
-.detailContainer{
+.detailContainer {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    gap:12px;
-
+    gap: 12px;
+    background-image: url("https://media.giphy.com/media/HqPIaEnnCdLSJuaSNC/giphy.gif");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+    width: 100vw;
+    height: 100vh;
 }
 
-.detailImage{
+.detailImage {
     justify-content: center;
     align-items: center;
     display: flex;
     flex-direction: column;
 }
 
-.detailImage button{
+.detailImage button {
     width: 200px;
     height: 50px;
     background-image: linear-gradient(to right top, #370505, #712c0f, #9f6200, #b5a300, #a8eb12);
@@ -23,16 +28,18 @@
     font-weight: bold;
 }
 
-.detailImage button a{
-    color:#cedbe4;
+.detailImage button a {
+    color: #cedbe4;
 }
 
-.detailInfo{
-    border: solid 2px greenyellow;
+.detailInfo {
+    border: solid 2px red;
     border-radius: 20px;
-    box-shadow: 12px 12px 53px -18px #A8EB12;
+    box-shadow: 12px 12px 53px -18px #000;
     width: 400px;
     margin-top: 10px;
     text-align: left;
     padding-left: 22px;
+    background-color: red;
+    color:#fff
 }

@@ -1,4 +1,13 @@
 /* Estilos en línea específicos para el formulario*/
+.formBack{
+  background-image: url('./Mo4R.gif');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  color:blanchedalmond;
+  width: 100vw;
+  height: 100vh;
+}
+
 .formStyles{
   margin: '20px';
   padding: '20px';

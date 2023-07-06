@@ -1,3 +1,11 @@
+/*.containerHome{
+   background-image: url("https://i.gifer.com/Mo4R.gif");
+  background-image: url("https://media.giphy.com/media/mWUeBpAE5YxKnOrbBv/giphy.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+ */
+
 .cardTas {
     display:flex;
     flex-direction: row;

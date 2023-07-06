@@ -5,10 +5,10 @@ import style from './Landing.module.css'
 export default function Landing() {
   return (
     <div className={`${style.Landing}`}>
-      <h1>landing</h1>
+      {/* <h1>landing</h1> */}
       <Link to = '/home'>
-        <button className = {`${style.buttonLanding}`}><span></span>To Enter</button>
+        <button className={`${style.buttonLanding}`}><span></span>To Enter</button>
       </Link>
     </div>
   )
-}
+  }
