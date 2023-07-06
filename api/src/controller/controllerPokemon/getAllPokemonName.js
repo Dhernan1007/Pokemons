@@ -7,7 +7,7 @@ const helperDB = require('../../helpers/helperDB')
 
 module.exports = async (name)=>{
 
-  const nameLower = name.toLowerCase();
+  //const nameLower = name.toLowerCase();
 
     const getNameToApi = await axios(`https://pokeapi.co/api/v2/pokemon/${name}`);
 //esto está bien

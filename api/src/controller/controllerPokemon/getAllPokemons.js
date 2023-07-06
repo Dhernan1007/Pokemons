@@ -15,7 +15,7 @@ module.exports = async () => {
         return apiHelper(pokemonData);
     }));
 
-//hasta aquí está bien
+
     
 
     const allPokemonDB = await Pokemon.findAll({
