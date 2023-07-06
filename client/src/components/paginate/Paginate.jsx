@@ -3,7 +3,7 @@ import styles from './paginate.module.css'; // Importar el módulo de estilos
 
 export default function Paginate({ pokemonPerPage, allPokemons, paginate, activePage, currentPage }) {
   const pageNumbers = [];
-  const totalPage = Math.ceil(allPokemons / pokemonPerPage)
+  const totalPage = Math.ceil(allPokemons / pokemonPerPage) //da el numero de paginas totales
 
   for (let i = 0; i < totalPage; i++) {
     pageNumbers.push(i + 1);
@@ -17,9 +17,9 @@ export default function Paginate({ pokemonPerPage, allPokemons, paginate, active
           pageNumbers.map((number) => (
             <div className={styles.number} key={number}>
             
-              <p onClick={() => paginate(number)} className={number === activePage ? styles.active : ''}>
+              <button onClick={() => paginate(number)} className={number === activePage ? styles.active : ''}>
                 {number}
-              </p>
+              </button>
             </div>
           ))}
           <button onClick={()=>{currentPage < totalPage && paginate(currentPage + 1)}}>Next</button> 

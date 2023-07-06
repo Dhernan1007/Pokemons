@@ -1,5 +1,3 @@
-const { BOOLEAN } = require("sequelize")
-
 module.exports = (pokemonDB) => {
     return {
         id: pokemonDB.id,

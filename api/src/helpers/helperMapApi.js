@@ -11,7 +11,7 @@ module.exports = (arr) => {
       defense: pokemon.data.stats[2].base_stat,
       speed: pokemon.data.stats[5].base_stat,
       // type: pokemon.types.type.name, 
-      type: (pokemon.data.types.map(elements => elements.type.name)),
+      type: pokemon.data.types.map(elements => elements.type.name),
       // type: pokemon.types.map(elements => elements = { type: elements.type.name }),
     }
   })

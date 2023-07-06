@@ -45,7 +45,7 @@ export function getNamePokemon(name){
 export function getTypePokemon(){
     return async(dispatch)=>{
         const dataType = await axios('http://localhost:3001/types')
-        const allType = dataType.data.types
+        const allType = dataType.data
         console.log(allType, 'hola soy tom');
          dispatch({
             type: GET_TYPE_POKEMON, payload: allType
@@ -57,7 +57,7 @@ export function getTypePokemon(){
 export function postPokemon(payload){
     return async function(dispatch){
         const response = await axios.post('http://localhost:3001/pokemons', payload) // el payload se coloca acá porque es lo que va a recibir del front
-        console.log(response);
+        // console.log(response);
         return response;
     }
 }

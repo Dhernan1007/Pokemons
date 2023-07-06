@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import style from './card.module.css'
 
 export default function Card({ id, name, image, type, attack }) {
   console.log(type);
@@ -7,15 +8,17 @@ export default function Card({ id, name, image, type, attack }) {
 
   return (
     <div>
-      <div >
+      <div className={style.cardN} >
         <Link to={`/detail/${id}`} style={{ textDecoration: "none" }}>
            <div className="card-img">
-            <span><h3>Id: {id}</h3></span>
-            <h3>Name: {name}</h3>
-            <span className=""><h3>Type: {formType}</h3></span>
-            <h3>Attack: {attack}</h3>
-            <div>
+            <span>{'000'+id}</span>
             <img src={image} alt='Not Found' />
+            <div className={style.cardInfo}>
+            <h3>Name: {name}</h3>
+            <p>Attack: {attack}</p>
+            <p>Type: {formType}</p>
+            </div>
+            <div>
             </div>
           </div> 
          </Link>
