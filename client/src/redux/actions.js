@@ -62,7 +62,7 @@ export function postPokemon(payload){
     }
 }
 
-export function filterByTypes(payload){ //ojito si esta repetida
+export function filterByTypes(payload){ 
     return{
         type: FILTER_BY_TYPE,
         payload,

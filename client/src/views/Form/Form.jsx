@@ -3,23 +3,22 @@ import { Link, useHistory } from 'react-router-dom';
 import { postPokemon, getTypePokemon } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import style from './Form.module.css'
-// import img1 from '../../img/digimon-survive-recruit.jpg';
-// import img2 from '../../img/guilmon.jpeg';
-// import img3 from '../../img/terriermon.jpeg';
+const isValid = /^[a-zA-Z]+$/;
 
 // Validaciones
 function validate(input) {
   const errors = {};
 
-  // if (!input.name) {
-  //   errors.name = console.warn('El nombre no puede estar vacío');
-  // }
+ 
   if (input.name.trim().length === 0) {
-    errors.name = alert('Te has olvidado de ingresar tu nombre');
+    errors.name = 'Te has olvidado de ingresar tu nombre';
   }
 
   if (input.name.length < 3 || input.name.length > 12) {
     errors.name = 'El nombre debe contener de 3 a 12 letras';
+  }
+  if(!isValid.test(input.name)){
+    errors.name = 'El nombre solo debe contener letras'
   }
 
   if(input.hp > 999 || input.hp < 0){
@@ -95,10 +94,6 @@ const Form = () => {
       ...input,
       errors: result,
     });
-
-    // if (Object.keys(result).length) {
-    //   console.log('Formulario válido');
-    // }
     dispatch(postPokemon(input));
     setInput({ ...initialFormState });
     history.push('/home');
@@ -205,6 +200,7 @@ const Form = () => {
             autocomplete="off"
             name="type"
             required
+            // multiple
           >
             <option value="">Select By Types</option>
             {typesPokes &&
@@ -218,9 +214,6 @@ const Form = () => {
         </div>
         <button type="submit">Crear</button>
       </form>
-      {/* <img src={img1} alt="img" width="200px" height="auto" />
-      <img src={img2} alt="img" width="200px" height="auto" />
-      <img src={img3} alt="img" width="200px" height="auto" /> */}
     </div>
     </div>
   );

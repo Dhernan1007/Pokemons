@@ -11,7 +11,7 @@ export default function Card({ id, name, image, type, attack }) {
       <div className={style.cardN} >
         <Link to={`/detail/${id}`} style={{ textDecoration: "none" }}>
            <div className="card-img">
-            <span>{'000'+id}</span>
+            {/* <span>{'000'+id}</span> */}
             <img src={image} alt='Not Found' />
             <div className={style.cardInfo}>
             <h3>Name: {name}</h3>

@@ -20,7 +20,7 @@ export default function Detail() {
   return (
     <div className={style.detailContainer}>
     <div className={style.detailInfo}>
-      <h1>Id: {detailPokemon.id}</h1>
+      {/* <h1>Id: {detailPokemon.id}</h1> */}
       <h1>Name: {detailPokemon.name}</h1>
       <h1>Height: {detailPokemon.height}</h1>
       <h1>Weight: {detailPokemon.weight}</h1>
