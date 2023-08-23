@@ -1,32 +1,14 @@
+require('dotenv').config();
 const {Pokemon, Type} = require('../../db')
-const {Op} = require('sequelize')
 const axios = require('axios')
 const helperApi = require('../../helpers/helperApi')
 const helperDB = require('../../helpers/helperDB')
-
+const {ALL_POKE_BY_API} = process.env
 
 module.exports = async (name)=>{
 
-  //const nameLower = name.toLowerCase();
+    const getNameToApi = await axios(ALL_POKE_BY_API +`/${name}`);
 
-    const getNameToApi = await axios(`https://pokeapi.co/api/v2/pokemon/${name}`);
-//esto está bien
-
-
-
-
-    /* Si no desea nada de la tabla de unión, puede proporcionar explícitamente una matriz vacía a la attributesopción dentro de la throughopción de la includeopción y, en este caso, no se obtendrá nada y la propiedad adicional ni siquiera se creará:
-
-Foo.findOne({
-  include: {
-    model: Bar,
-    through: {
-      attributes: []
-    }
-  }
-}); */
-
-    
     if(getNameToApi){
       const infoNamePoke = helperApi(getNameToApi);
       return infoNamePoke

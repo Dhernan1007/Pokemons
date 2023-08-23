@@ -1,9 +1,9 @@
 const {Router} = require('express');
-const getPokemons = require('../handlers/getPokemon.js');
-const getPokemonByID = require('../handlers/getPokemonByID.js')
-const getPokemonsName = require('../handlers/getPokemonsName.js')
+const getPokemons = require('../handlers/handlersPokemon/getPokemon');
+const getPokemonByID = require('../handlers/handlersPokemon/getPokemonByID')
+const getPokemonsName = require('../handlers/handlersPokemon/getPokemonsName')
 const validate = require('../middleware/validation.js')
-const getCreatePokemon = require('../handlers/getCreatePokemon.js')
+const getCreatePokemon = require('../handlers/handlersPokemon/getCreatePokemon')
 const pokemonRouter = Router();
 
 pokemonRouter.get('/', getPokemons)

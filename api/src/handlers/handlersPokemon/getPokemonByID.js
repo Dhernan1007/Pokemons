@@ -1,4 +1,4 @@
-const getPokemonsByID = require('../controller/controllerPokemon/getPokemonsByID')
+const getPokemonsByID = require('../../controller/controllerPokemon/getPokemonsByID')
 
 module.exports = async(req, res)=>{
     const {idPokemon} = req.params

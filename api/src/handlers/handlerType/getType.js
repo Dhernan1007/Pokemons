@@ -1,4 +1,4 @@
-const getType = require('../controller/controllerTypes/getAllTypes')
+const getType = require('../../controller/controllerTypes/getAllTypes')
 
 module.exports = async(req, res)=>{
     try {

@@ -1,4 +1,4 @@
-const createPokemon = require('../controller/controllerPokemon/createNewPokemon')
+const createPokemon = require('../../controller/controllerPokemon/createNewPokemon')
 
 module.exports = async (req, res)=>{
     try {

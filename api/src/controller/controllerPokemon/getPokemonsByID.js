@@ -1,13 +1,14 @@
+require('dotenv').config();
 const { Pokemon, Type } = require('../../db')
 const axios = require('axios')
 const helperDB = require('../../helpers/helperMapDB')
 const helperApi = require('../../helpers/helperMapApi')
-
+const {ALL_POKE_BY_API} = process.env
 module.exports = async (idPokemon, search) => {
 
 
     const pokemonFind =
-        search === 'api' ? helperApi([await axios(`https://pokeapi.co/api/v2/pokemon/${idPokemon}`)])
+        search === 'api' ? helperApi(await axios(ALL_POKE_BY_API +`/${idPokemon}`))
 
             : helperDB([await Pokemon.findByPk(idPokemon, {
                 include: [{
@@ -19,9 +20,9 @@ module.exports = async (idPokemon, search) => {
                 }]
             })
             ])
-console.log(pokemonFind)
     if (search === 'api') {
-        pokemonFind.filter(pokeID => pokeID.id === Number(idPokemon))
+        let result = [pokemonFind].filter(pokeID => pokeID.id === Number(idPokemon))
+        return result
     }
     return pokemonFind;
 }

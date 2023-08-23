@@ -1,4 +1,5 @@
 const { Pokemon, Type } = require('../../db');
+const helperMapDB = require('../../helpers/helperMapDB');
 
 module.exports = async (name, image, height, weight, hp, attack, defense, speed, type, createdInDb) => {
 
@@ -20,11 +21,13 @@ module.exports = async (name, image, height, weight, hp, attack, defense, speed,
         where: { name: type }
     })
 
-    console.log(idTypes);
+    const setType = new Set();
+    idTypes.forEach((type) => setType.add(type));
 
-   await pokemon.addType(idTypes)
+    await pokemon.addType(idTypes);
 
-    const pokemonRelation = await Pokemon.findOne({
+
+    const pokemonDB = await Pokemon.findOne({
       where:{
          id: pokemon.id
       },
@@ -39,7 +42,8 @@ module.exports = async (name, image, height, weight, hp, attack, defense, speed,
       ]
     })
 
+    let objPokemon = helperMapDB(pokemonDB)
     
 
-    return pokemonRelation;
+    return objPokemon;
 }

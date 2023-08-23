@@ -1,4 +1,4 @@
-const getPokemonsName = require('../controller/controllerPokemon/getAllPokemonName')
+const getPokemonsName = require('../../controller/controllerPokemon/getAllPokemonName')
 
 module.exports = async (req, res)=>{
     const {name} = req.query;

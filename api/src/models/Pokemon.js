@@ -1,8 +1,6 @@
 const { DataTypes } = require('sequelize');
-// Exportamos una funcion que define el modelo
-// Luego le injectamos la conexion a sequelize.
+
 module.exports = (sequelize) => {
-  // defino el modelo
   sequelize.define('pokemon', {
     id:{
       type: DataTypes.UUID,
@@ -14,12 +12,9 @@ module.exports = (sequelize) => {
       allowNull: false,
       unique: true,
       set(value){
-            //La función set se utiliza aquí para normalizar el valor del username. Específicamente, se utiliza el método toLowerCase() de JavaScript para convertir cualquier valor de username en minúsculas antes de guardarlo en la base de datos.
-        this.setDataValue('name', value.toLowerCase())
+           this.setDataValue('name', value.toLowerCase())
       },
-      //Propiedad validate, valida lo que necesite
       validate: {
-        // len me da un rango de existencia del tipo de dato
         len: {
           args: [3,12],
           msg: 'Please enter a name containing 3 to 12 characters'
@@ -99,11 +94,3 @@ module.exports = (sequelize) => {
     timestamps: false, freezeTableName: true,
   });
 };
-/* El atributo "freezeTableName" en Sequelize se utiliza para especificar si se debe congelar o mantener el nombre del modelo como el nombre de la tabla en la base de datos, 
-sin aplicar ninguna transformación o pluralización.
-
-Por defecto, Sequelize realiza una transformación en el nombre del modelo al crear la tabla en la base de datos. Por ejemplo, si tienes un modelo llamado "User", Sequelize automáticamente creará una tabla llamada "Users" en la base de datos.
-
-Sin embargo, al establecer "freezeTableName" en "true", Sequelize no realizará ninguna transformación en el nombre del modelo y lo utilizará directamente como el nombre de la tabla en la base de datos.
-
-Esto puede ser útil en situaciones donde deseas tener un control total sobre el nombre de la tabla y no deseas que Sequelize realice ninguna modificación en el nombre del modelo al crear la tabla correspondiente.*/

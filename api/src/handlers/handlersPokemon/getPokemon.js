@@ -1,5 +1,4 @@
-// const {Pokemon, Type} = require('../db')
-const getAllPokemons = require('../controller/controllerPokemon/getAllPokemons')
+const getAllPokemons = require('../../controller/controllerPokemon/getAllPokemons')
 
 
 module.exports = async (req, res) => {
